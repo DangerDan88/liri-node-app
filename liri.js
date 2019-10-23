@@ -8,12 +8,12 @@ var axios = require("axios");
 
 
 function spotifySearch() {
-    spotify.search({ type: 'track', query: 'All the Small Things' }, function (err, data) {
+    spotify.search({ type: 'track', query: 'All the Small Things' }, function (err, response) {
         if (err) {
             return console.log('Error occurred: ' + err);
         }
 
-       // console.log(data);
+       // console.log(response.data);
     });
 } function movieSearch() {
     axios.get("http://www.omdbapi.com/?i=tt3896198&apikey=Trilogy&t=Batman-Begins&r=json").then(function (response, err) {
@@ -35,11 +35,12 @@ function spotifySearch() {
 
 }
 
-movieSearch();
+//movieSearch();
 function bands() {
 var artist = process.argv[2];
     axios.get("https://rest.bandsintown.com/artists/" + artist + "/events?app_id=codingbootcamp").then(function (response, err) {
-//console.log(response.data);
+    console.log(JSON.stringify(response.data.name));
+    //console.log(response.data);
     }).catch(function(err){
         console.log(err);
     })
