@@ -13,11 +13,19 @@ function spotifySearch() {
             return console.log('Error occurred: ' + err);
         }
 
-        console.log(data);
+       // console.log(data);
     });
 } function movieSearch() {
-    axios.get("http://www.omdbapi.com/?i=tt3896198&apikey=Trilogy&s=Batman").then(function (data, err) {
-        console.log(data.data);
+    axios.get("http://www.omdbapi.com/?i=tt3896198&apikey=Trilogy&t=Batman-Begins&r=json").then(function (response, err) {
+    console.log(JSON.stringify(response.data.Title))  
+    console.log(JSON.stringify(response.data.Year));
+    console.log(JSON.stringify(response.data.Ratings))
+    console.log(JSON.stringify(response.data.Country));
+    console.log(JSON.stringify(response.data.Language));
+    console.log(JSON.stringify(response.data.Plot));
+    console.log(JSON.stringify(response.data.Actors));
+    //console.log(JSON.stringify(response.data))
+        
     }).catch(function (err) {
         console.log(err);
     })
@@ -30,8 +38,8 @@ function spotifySearch() {
 movieSearch();
 function bands() {
 var artist = process.argv[2];
-    axios.get("https://rest.bandsintown.com/artists/" + artist + "/events?app_id=codingbootcamp").then(function (data, err) {
-console.log(data.data);
+    axios.get("https://rest.bandsintown.com/artists/" + artist + "/events?app_id=codingbootcamp").then(function (response, err) {
+//console.log(response.data);
     }).catch(function(err){
         console.log(err);
     })
@@ -39,5 +47,6 @@ console.log(data.data);
 
 }
 bands();
+
 
 
