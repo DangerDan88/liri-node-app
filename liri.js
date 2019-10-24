@@ -3,7 +3,8 @@ var Spotify = require('node-spotify-api');
 var keys = require("./keys");
 var spotify = new Spotify(keys.spotify);
 var axios = require("axios");
-var command = process.argv[2];
+var moment = require("moment");
+//var command = process.argv[2];
 //var userInput = process.argv[3];
 
 
@@ -27,7 +28,7 @@ function spotifySearch() {
     });
 
 }
-spotifySearch();
+//spotifySearch();
 function movieSearch() {
     axios.get("http://www.omdbapi.com/?i=tt3896198&apikey=Trilogy&t=Batman-Begins&r=json").then(function (response, err) {
         console.log(JSON.stringify(response.data.Title))
@@ -49,17 +50,31 @@ function movieSearch() {
 
 //movieSearch();
 function bands() {
-
+var artist = process.argv[2];
     axios.get("https://rest.bandsintown.com/artists/" + artist + "/events?app_id=codingbootcamp").then(function (response, err) {
+       var bandArray = Object.values(response);
+    for(var i = 0; i < bandArray.length; i++) {
        
-        //console.log(response.data);
+        // venue but is pulling all venues
+        console.log(response.data[i].venue.name);
+        console.log(response.data[i].venue.city);
+        console.log(response.data[i].venue.country);
+       
+        concertTime =  console.log(response.data[i].datetime);
+        var currentTime = moment(concertTime).format('YYYY MM DD'); 
+console.log('Current Time is ',currentTime);
+
+       // moment(concertTime).format('MM DD YYYY'); 
+       // console.log(concertTime); 
+        
+      }
     }).catch(function (err) {
         console.log(err);
     })
 
 
 }
-//bands();
+bands();
 
 
 
