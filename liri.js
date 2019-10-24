@@ -50,24 +50,22 @@ function movieSearch() {
 
 //movieSearch();
 function bands() {
-var artist = process.argv[2];
+    var artist = process.argv[2];
     axios.get("https://rest.bandsintown.com/artists/" + artist + "/events?app_id=codingbootcamp").then(function (response, err) {
-       var bandArray = Object.values(response);
-    for(var i = 0; i < bandArray.length; i++) {
-       
-        // venue but is pulling all venues
-        console.log(response.data[i].venue.name);
-        console.log(response.data[i].venue.city);
-        console.log(response.data[i].venue.country);
-       
-        concertTime =  console.log(response.data[i].datetime);
-        var currentTime = moment(concertTime).format('YYYY MM DD'); 
-console.log('Current Time is ',currentTime);
+        var bandArray = Object.values(response);
+        for (var i = 0; i < bandArray.length; i++) {
 
-       // moment(concertTime).format('MM DD YYYY'); 
-       // console.log(concertTime); 
-        
-      }
+            // venue but is pulling all venues
+            console.log(response.data[i].venue.name);
+            console.log(response.data[i].venue.city);
+            console.log(response.data[i].venue.country);
+
+            var concertTime = console.log(moment(response.data[i].datetime).format('MM/DD/YYYY'));
+
+
+
+
+        }
     }).catch(function (err) {
         console.log(err);
     })
